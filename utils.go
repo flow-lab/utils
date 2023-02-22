@@ -23,6 +23,17 @@ func GetEnv(k string) (string, error) {
 	return "", errors.New("environment variable " + k + " not set")
 }
 
+// MustGetEnv returns the value of the environment variable k or panics if it is not set.
+// Note: Panics are not recoverable. Use this function only in main() or init() functions.
+// Otherwise, use GetEnv to handle the error.
+func MustGetEnv(k string) string {
+	v := os.Getenv(k)
+	if v == "" {
+		panic("environment variable " + k + " not set")
+	}
+	return v
+}
+
 // Short returns a shortened string of length 7.
 // Useful for shortening commit hashes.
 // And nothing else.
