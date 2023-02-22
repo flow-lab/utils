@@ -1,0 +1,35 @@
+package helper
+
+import (
+	"errors"
+	"os"
+)
+
+// EnvOrDefault returns the value of the environment variable k or defaultVal if it is not set.
+func EnvOrDefault(k string, defaultVal string) string {
+	v := os.Getenv(k)
+	if v == "" {
+		return defaultVal
+	}
+	return v
+}
+
+// GetEnv returns the value of the environment variable k or if it is not set an error.
+func GetEnv(k string) (string, error) {
+	if v, ok := os.LookupEnv(k); ok {
+		return v, nil
+	}
+
+	return "", errors.New("environment variable " + k + " not set")
+}
+
+// Short returns a shortened string of length 7.
+// Useful for shortening commit hashes.
+// And nothing else.
+// Really.
+func Short(s string) string {
+	if len(s) > 7 {
+		return s[0:7]
+	}
+	return s
+}
