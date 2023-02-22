@@ -1,4 +1,4 @@
-module flowlab.no/utils
+module github.com/flow-lab/utils
 
 go 1.20
 
