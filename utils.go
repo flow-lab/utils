@@ -6,7 +6,7 @@ import (
 )
 
 // EnvOrDefault returns the value of the environment variable k or defaultVal if it is not set.
-func EnvOrDefault(k string, defaultVal string) string {
+func EnvOrDefault(k string, defaultVal interface{}) interface{} {
 	v := os.Getenv(k)
 	if v == "" {
 		return defaultVal
