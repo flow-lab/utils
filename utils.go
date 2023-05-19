@@ -3,6 +3,7 @@ package helper
 import (
 	"errors"
 	"os"
+	"strconv"
 )
 
 // EnvOrDefault returns the value of the environment variable k or defaultVal if it is not set.
@@ -12,6 +13,21 @@ func EnvOrDefault(k string, defaultVal interface{}) interface{} {
 		return defaultVal
 	}
 	return v
+}
+
+// EnvOrDefaultInt64 returns the value of the environment variable k or defaultVal if it is not set.
+// It panics if the value is not an int64.
+// Note: Panics are not recoverable. Use this function only in main() or init() functions.
+func EnvOrDefaultInt64(k string, defaultVal int64) int64 {
+	v := os.Getenv(k)
+	if v == "" {
+		return defaultVal
+	}
+	i, err := strconv.ParseInt(v, 10, 64)
+	if err != nil {
+		panic(errors.New("environment variable " + k + " is not an int64"))
+	}
+	return i
 }
 
 // GetEnv returns the value of the environment variable k or if it is not set an error.

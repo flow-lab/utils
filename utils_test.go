@@ -14,6 +14,12 @@ func TestUtils(t *testing.T) {
 		assert.Equal(t, "DEFAULT_VALUE2", EnvOrDefault("TEST_KEY2", "DEFAULT_VALUE2"))
 	})
 
+	t.Run("EnvOrDefaultInt64", func(t *testing.T) {
+		err := os.Setenv("TEST_KEY", "1234")
+		assert.Nil(t, err)
+		assert.Equal(t, int64(1234), EnvOrDefaultInt64("TEST_KEY", 1234))
+	})
+
 	t.Run("TestGetEnv", func(t *testing.T) {
 		// set env variable
 		err := os.Setenv("TEST_KEY", "TEST_VALUE")
