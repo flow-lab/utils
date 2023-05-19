@@ -15,6 +15,15 @@ func EnvOrDefault(k string, defaultVal interface{}) interface{} {
 	return v
 }
 
+// EnvOrDefaultString returns the value of the environment variable k or defaultVal if it is not set.
+func EnvOrDefaultString(k string, defaultVal string) string {
+	v := os.Getenv(k)
+	if v == "" {
+		return defaultVal
+	}
+	return v
+}
+
 // EnvOrDefaultInt64 returns the value of the environment variable k or defaultVal if it is not set.
 // It panics if the value is not an int64.
 // Note: Panics are not recoverable. Use this function only in main() or init() functions.
