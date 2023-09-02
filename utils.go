@@ -46,6 +46,21 @@ func EnvAsInt64OrDefault(k string, defaultVal int64) int64 {
 	return i
 }
 
+// EnvAsFloat32OrDefault returns the value of the environment variable k or defaultVal if it is not set.
+// It panics if the value is not a float32.
+// Note: Panics are not recoverable. Use this function only in main() or init() functions.
+func EnvAsFloat32OrDefault(k string, defaultVal float32) float32 {
+	v := os.Getenv(k)
+	if v == "" {
+		return defaultVal
+	}
+	i, err := strconv.ParseFloat(v, 32)
+	if err != nil {
+		panic(errors.New("environment variable " + k + " is not a float32"))
+	}
+	return float32(i)
+}
+
 // EnvAsBoolOrDefault returns the value of the environment variable k or defaultVal if it is not set.
 // It panics if the value is not a bool.
 // Note: Panics are not recoverable. Use this function only in main() or init() functions.
