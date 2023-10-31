@@ -79,4 +79,15 @@ func TestUtils(t *testing.T) {
 		assert.Equal(t, "1234", Short("1234"))
 		assert.Equal(t, "", Short(""))
 	})
+
+	t.Run("Test2Ptr", func(t *testing.T) {
+		var i int64 = 1234
+		assert.Equal(t, &i, Ptr(i))
+		var f float32 = 1234
+		assert.Equal(t, &f, Ptr(f))
+		var b bool = true
+		assert.Equal(t, &b, Ptr(b))
+		var s string = "1234"
+		assert.Equal(t, &s, Ptr(s))
+	})
 }
