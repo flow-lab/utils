@@ -105,3 +105,9 @@ func Short(s string) string {
 	}
 	return s
 }
+
+// Ptr returns a pointer to the given value.
+// Useful for passing values to functions that expect pointers.
+func Ptr[T any](value T) *T {
+	return &value
+}
