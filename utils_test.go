@@ -21,6 +21,13 @@ func TestUtils(t *testing.T) {
 		assert.Equal(t, int64(1234), EnvOrDefaultInt64("TEST_KEY", 1234))
 	})
 
+	t.Run("EnvAsIntOrDefault", func(t *testing.T) {
+		assert.Equal(t, 4321, EnvAsIntOrDefault("NOT_EXISTING", 4321))
+		err := os.Setenv("TEST_KEY", "1234")
+		assert.Nil(t, err)
+		assert.Equal(t, 1234, EnvAsIntOrDefault("TEST_KEY", 1234))
+	})
+
 	t.Run("EnvAsInt64OrDefault", func(t *testing.T) {
 		assert.Equal(t, int64(4321), EnvAsInt64OrDefault("NOT_EXISTING", 4321))
 		err := os.Setenv("TEST_KEY", "1234")

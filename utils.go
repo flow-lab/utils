@@ -31,6 +31,19 @@ func EnvOrDefaultInt64(k string, defaultVal int64) int64 {
 	return i
 }
 
+// EnvAsIntOrDefault returns the value of the environment variable k or defaultVal as int if it is not set.
+func EnvAsIntOrDefault(k string, defaultVal int) int {
+	v := os.Getenv(k)
+	if v == "" {
+		return defaultVal
+	}
+	i, err := strconv.Atoi(v)
+	if err != nil {
+		panic(errors.New("environment variable " + k + " is not an int"))
+	}
+	return i
+}
+
 // EnvAsInt64OrDefault returns the value of the environment variable k or defaultVal if it is not set.
 // It panics if the value is not an int64.
 // Note: Panics are not recoverable. Use this function only in main() or init() functions.
